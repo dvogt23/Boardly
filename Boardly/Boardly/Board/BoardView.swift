@@ -2,6 +2,10 @@ import BoardlyKit
 import SwiftUI
 import UIKit
 
+/// How a board lays its cards out. The last mode the user picked is remembered
+/// app-wide in UserDefaults under `boardly.boardViewMode`, so the next board opens
+/// the way the previous one was left (`rawValue` is the persistence identifier —
+/// never shown; `localizedName` is the copy).
 enum BoardViewMode: String, CaseIterable {
     case kanban, list, grid
 
@@ -12,6 +16,8 @@ enum BoardViewMode: String, CaseIterable {
         case .grid: "Grid"
         }
     }
+
+    static let storageKey = "boardly.boardViewMode"
 }
 
 /// Thin wrapper that binds a board to its *shared*, ref-counted session. Opening
@@ -106,7 +112,8 @@ private struct BoardScreen: View {
 
     @State private var selectedCardId: SelectedCard?
     @State private var didFocusCard = false
-    @State private var mode: BoardViewMode = .kanban
+    /// Shared across boards, so switching to List here opens the next board in List.
+    @AppStorage(BoardViewMode.storageKey) private var modeRaw = BoardViewMode.kanban.rawValue
     /// The kanban column currently paged into view (nil until the first scroll).
     @State private var kanbanListId: String?
     @State private var showAddCard = false
@@ -122,6 +129,9 @@ private struct BoardScreen: View {
 
     /// Live board name — reflects a rename, falling back to the nav-time name.
     private var currentBoardName: String { viewModel.payload?.board.name ?? boardName }
+
+    /// The remembered layout, falling back to Kanban if the stored value is unknown.
+    private var mode: BoardViewMode { BoardViewMode(rawValue: modeRaw) ?? .kanban }
 
     /// Cards of a list after applying the active filter (members / labels / due).
     private func visibleCards(in list: PlankaList, payload: BoardPayload) -> [Card] {
@@ -290,7 +300,7 @@ private struct BoardScreen: View {
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 .fill(active ? Color.boardlySurface : .clear))
                         .onTapGesture {
-                            withAnimation(.easeInOut(duration: 0.15)) { mode = item }
+                            withAnimation(.easeInOut(duration: 0.15)) { modeRaw = item.rawValue }
                         }
                 }
             }
