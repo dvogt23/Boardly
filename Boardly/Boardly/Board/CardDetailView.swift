@@ -786,10 +786,8 @@ private struct CommentBubble: View {
                     }
                     Spacer(minLength: 0)
                 }
-                Text(comment.text)
-                    .font(.boardlyBody)
-                    .foregroundStyle(Color.boardlyInk)
-                    .fixedSize(horizontal: false, vertical: true)
+                // Comment bodies are Markdown in PLANKA — render them as such.
+                MarkdownText(markdown: comment.text)
             }
         }
         .padding(12)
