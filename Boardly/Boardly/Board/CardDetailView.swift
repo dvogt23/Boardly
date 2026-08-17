@@ -13,6 +13,9 @@ struct CardDetailView: View {
     @State private var newTaskName = ""
     @State private var addingTaskInListId: String?
     @FocusState private var taskFieldFocused: Bool
+    @State private var newTaskListName = ""
+    @State private var isAddingTaskList = false
+    @FocusState private var taskListFieldFocused: Bool
     @State private var didSeedEditState = false
     @State private var showLabelsSheet = false
     @State private var showMembersSheet = false
@@ -146,6 +149,7 @@ struct CardDetailView: View {
                     ForEach(payload.taskLists(for: card)) { taskList in
                         taskListSection(taskList: taskList, payload: payload)
                     }
+                    addTaskListSection(card: card)
 
                     commentsSection(card: card)
                     if !actions.isEmpty { activitySection(payload: payload) }
@@ -473,6 +477,58 @@ struct CardDetailView: View {
             }
         }
         .boardlyCard()
+    }
+
+    /// Creates a new checklist on the card. Once created it renders through
+    /// `taskListSection` like any other, so tasks are added the usual way.
+    private func addTaskListSection(card: Card) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            if isAddingTaskList {
+                HStack(spacing: 12) {
+                    Image(systemName: "checklist")
+                        .foregroundStyle(Color.boardlyTextTertiary)
+                        .font(.system(size: 18))
+                    TextField("Checklist name", text: $newTaskListName)
+                        .font(.boardlyBody)
+                        .focused($taskListFieldFocused)
+                        .submitLabel(.done)
+                        .onSubmit { submitTaskList(card: card) }
+                }
+                HStack(spacing: 12) {
+                    Button("Add") { submitTaskList(card: card) }
+                        .font(.sans(14, .semibold))
+                        .disabled(newTaskListName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    Button("Cancel", role: .cancel) {
+                        isAddingTaskList = false
+                        newTaskListName = ""
+                    }
+                    .font(.sans(14))
+                    .foregroundStyle(Color.boardlyTextSecondary)
+                    Spacer(minLength: 0)
+                }
+            } else {
+                Button {
+                    isAddingTaskList = true
+                    newTaskListName = ""
+                    taskListFieldFocused = true
+                } label: {
+                    SwiftUI.Label("Add a checklist", systemImage: "checklist")
+                        .font(.boardlyCallout)
+                        .foregroundStyle(Color.boardlyTextSecondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .boardlyCard()
+    }
+
+    private func submitTaskList(card: Card) {
+        let name = newTaskListName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !name.isEmpty else { return }
+        Task { await boardVM.createTaskList(in: card, name: name) }
+        newTaskListName = ""
+        isAddingTaskList = false
     }
 
     // MARK: - Comments (read-only count for now; full thread arrives in Phase 4)

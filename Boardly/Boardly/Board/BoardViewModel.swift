@@ -122,6 +122,24 @@ final class BoardViewModel {
         }
     }
 
+    // MARK: - Task list CRUD
+
+    func createTaskList(in card: Card, name: String) async {
+        guard let payload else { return }
+        let position = (payload.taskLists(for: card).last?.position ?? 0) + 65536
+        do {
+            let taskList = try await client.createTaskList(
+                cardId: card.id,
+                name: name,
+                position: position)
+            var updated = payload
+            updated.taskLists.append(taskList)
+            self.payload = updated
+        } catch {
+            self.error = localizedErrorMessage(error)
+        }
+    }
+
     // MARK: - Task CRUD
 
     func toggleTask(_ task: PlankaTask) async {
