@@ -427,6 +427,7 @@ private struct BoardScreen: View {
                             ListModeCardRow(
                                 card: card,
                                 tasks: payload.taskLists(for: card).flatMap { payload.tasks(for: $0) },
+                                labels: payload.labels(for: card),
                                 onTap: { selectedCardId = SelectedCard(id: card.id) },
                                 onToggleTask: { task in Task { await viewModel.toggleTask(task) } })
                         }
@@ -506,6 +507,7 @@ private struct DeliberateColumnPaging: ScrollTargetBehavior {
 private struct ListModeCardRow: View {
     let card: Card
     let tasks: [PlankaTask]
+    var labels: [BoardlyKit.Label] = []
     let onTap: () -> Void
     let onToggleTask: (PlankaTask) -> Void
 
@@ -514,21 +516,25 @@ private struct ListModeCardRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Button(action: onTap) {
-                HStack(spacing: 10) {
-                    Text(card.name)
-                        .font(.sans(15, .semibold))
-                        .foregroundStyle(Color.boardlyInk)
-                        .multilineTextAlignment(.leading)
-                    Spacer(minLength: 0)
-                    if let due = card.dueDate {
-                        Text(due.formatted(.dateTime.month(.abbreviated).day()))
-                            .font(.mono(11, .medium))
-                            .foregroundStyle(due < Date() ? Color.boardlyDestructive : Color.boardlyTextSecondary)
-                    }
-                    if !tasks.isEmpty {
-                        Text("\(completed)/\(tasks.count)")
-                            .font(.mono(11, .medium))
-                            .foregroundStyle(Color.boardlyTextSecondary)
+                VStack(alignment: .leading, spacing: 6) {
+                    // Labels lead the row, above the title and counter, as in kanban.
+                    CardLabelCluster(labels: labels, maxVisible: 4)
+                    HStack(spacing: 10) {
+                        Text(card.name)
+                            .font(.sans(15, .semibold))
+                            .foregroundStyle(Color.boardlyInk)
+                            .multilineTextAlignment(.leading)
+                        Spacer(minLength: 0)
+                        if let due = card.dueDate {
+                            Text(due.formatted(.dateTime.month(.abbreviated).day()))
+                                .font(.mono(11, .medium))
+                                .foregroundStyle(due < Date() ? Color.boardlyDestructive : Color.boardlyTextSecondary)
+                        }
+                        if !tasks.isEmpty {
+                            Text("\(completed)/\(tasks.count)")
+                                .font(.mono(11, .medium))
+                                .foregroundStyle(Color.boardlyTextSecondary)
+                        }
                     }
                 }
             }

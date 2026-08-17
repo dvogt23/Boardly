@@ -34,18 +34,8 @@ struct CardRowView: View {
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                if !labels.isEmpty {
-                    HStack(spacing: 5) {
-                        ForEach(labels) { label in
-                            Text(label.name ?? "•")
-                                .font(.sans(11, .semibold))
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, 7)
-                                .padding(.vertical, 2)
-                                .background(Color(plankaLabel: label.color), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
-                        }
-                    }
-                }
+                // Labels lead the card, above the title and meta row.
+                CardLabelCluster(labels: labels, maxVisible: 4)
 
                 Text(card.name)
                     .font(.sans(15, .semibold))
