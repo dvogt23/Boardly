@@ -8,6 +8,10 @@
 # Xcode-generated Swift Package Manager user data
 .swiftpm/
 
+# Per-developer signing overrides (team id, bundle id). Signing.xcconfig carries the
+# upstream defaults and includes this file optionally — see Local.xcconfig.example.
+Boardly/Config/Local.xcconfig
+
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore

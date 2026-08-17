@@ -1,0 +1,13 @@
+// Signing / app identity — the two settings that differ per fork and per developer.
+// They live here instead of project.pbxproj so a team or bundle-id change never shows
+// up as a project-file diff. Values below are the upstream defaults; override them in
+// Local.xcconfig (gitignored). Xcode and xcodebuild both read this as the project's
+// base configuration.
+BOARDLY_DEVELOPMENT_TEAM = 79L65UMVXQ
+BOARDLY_BUNDLE_ID = com.rocquigny.Boardly
+
+// Optional include, so a clone without the file (CI, fresh checkout) still builds.
+#include? "Local.xcconfig"
+
+DEVELOPMENT_TEAM = $(BOARDLY_DEVELOPMENT_TEAM)
+PRODUCT_BUNDLE_IDENTIFIER = $(BOARDLY_BUNDLE_ID)
