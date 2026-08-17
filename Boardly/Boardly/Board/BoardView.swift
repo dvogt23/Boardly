@@ -568,30 +568,28 @@ private struct ListModeCardRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Button(action: onTap) {
-                VStack(alignment: .leading, spacing: 6) {
-                    // Labels lead the row, above the title and counter, as in kanban.
-                    CardLabelCluster(labels: labels, maxVisible: 4)
-                    HStack(spacing: 10) {
-                        Text(card.name)
-                            .font(.sans(15, .semibold))
-                            .foregroundStyle(Color.boardlyInk)
-                            .multilineTextAlignment(.leading)
-                        Spacer(minLength: 0)
-                        if let due = card.dueDate {
-                            Text(due.formatted(.dateTime.month(.abbreviated).day()))
-                                .font(.mono(11, .medium))
-                                .foregroundStyle(due < Date() ? Color.boardlyDestructive : Color.boardlyTextSecondary)
-                        }
-                        if !tasks.isEmpty {
-                            Text("\(completed)/\(tasks.count)")
-                                .font(.mono(11, .medium))
-                                .foregroundStyle(Color.boardlyTextSecondary)
-                        }
+            VStack(alignment: .leading, spacing: 6) {
+                // Labels lead the row, above the title and counter, as in kanban.
+                CardLabelCluster(labels: labels, maxVisible: 4)
+                HStack(spacing: 10) {
+                    Text(card.name)
+                        .font(.sans(15, .semibold))
+                        .foregroundStyle(Color.boardlyInk)
+                        .multilineTextAlignment(.leading)
+                    Spacer(minLength: 0)
+                    if let due = card.dueDate {
+                        Text(due.formatted(.dateTime.month(.abbreviated).day()))
+                            .font(.mono(11, .medium))
+                            .foregroundStyle(due < Date() ? Color.boardlyDestructive : Color.boardlyTextSecondary)
+                    }
+                    if !tasks.isEmpty {
+                        Text("\(completed)/\(tasks.count)")
+                            .font(.mono(11, .medium))
+                            .foregroundStyle(Color.boardlyTextSecondary)
                     }
                 }
             }
-            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             if !tasks.isEmpty {
                 VStack(alignment: .leading, spacing: 6) {
@@ -615,6 +613,14 @@ private struct ListModeCardRow: View {
             }
         }
         .boardlyCard()
+        // The whole card opens the detail — including its padding and the space around
+        // the tasks. A tap gesture rather than an enclosing Button, so the per-task
+        // checkboxes below keep working (a child Button wins over an ancestor gesture).
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onTap)
+        .accessibilityElement(children: .contain)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityAction(.default, onTap)
     }
 }
 
