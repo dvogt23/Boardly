@@ -147,6 +147,7 @@ private struct BoardScreen: View {
             VStack(spacing: 0) {
                 VStack(spacing: 0) {
                     header
+                    offlineBanner
                     viewSelector
                 }
                 .background(Color.boardlySurface.ignoresSafeArea(edges: .top))
@@ -176,6 +177,22 @@ private struct BoardScreen: View {
             // (see BoardView), not here — a tab switch must not tear it down.
         }
         .refreshable { await viewModel.load() }
+        // Queued work has just landed (local ids became real ones), or the server refused
+        // a mutation and the cached board is now wrong — either way, refetch.
+        .task {
+            let drained = NotificationCenter.default.notifications(named: .outboxDrained)
+            for await _ in drained {
+                await viewModel.load()
+            }
+        }
+        .task {
+            let refresh = NotificationCenter.default.notifications(named: .boardNeedsRefresh)
+            for await notification in refresh {
+                let boardId = notification.userInfo?["boardId"] as? String
+                guard boardId == nil || boardId == viewModel.boardId else { continue }
+                await viewModel.load()
+            }
+        }
         .navigationDestination(item: $selectedCardId) { selected in
             CardDetailView(cardId: selected.id, boardVM: viewModel)
         }
@@ -253,6 +270,9 @@ private struct BoardScreen: View {
             }
             .boardlyTapTarget("Filter and sort")
             Menu {
+                Button { Task { await viewModel.load() } } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
                 Button {
                     renameText = currentBoardName
                     showRename = true
@@ -313,6 +333,39 @@ private struct BoardScreen: View {
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
+    }
+
+    /// Shown while the board is a cached copy, or while edits are still queued — the two
+    /// facts a user needs to trust what they're looking at.
+    @ViewBuilder
+    private var offlineBanner: some View {
+        if viewModel.isShowingCachedCopy || !viewModel.pendingIds.isEmpty {
+            // Tappable: pull-to-refresh has to compete with the kanban's nested scroll
+            // views for the gesture, so there is always a button that just works.
+            Button { Task { await viewModel.load() } } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: viewModel.isShowingCachedCopy
+                        ? "wifi.slash" : "arrow.triangle.2.circlepath")
+                        .font(.system(size: 11, weight: .semibold))
+                    if viewModel.isShowingCachedCopy, let cachedAt = viewModel.cachedAt {
+                        Text("Offline copy from \(cachedAt.formatted(.relative(presentation: .named)))")
+                    } else if viewModel.isShowingCachedCopy {
+                        Text("Offline copy")
+                    } else {
+                        Text("\(viewModel.pendingIds.count) changes waiting to sync")
+                    }
+                    Spacer(minLength: 0)
+                    Text("Retry")
+                        .font(.sans(12, .semibold))
+                        .foregroundStyle(Color.accentColor)
+                }
+                .font(.sans(12, .medium))
+                .foregroundStyle(Color.boardlyTextSecondary)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 10)
+            }
+            .buttonStyle(.plain)
+        }
     }
 
     /// One dot per kanban column, the current one elongated — the horizontal scroll

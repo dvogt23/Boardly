@@ -10,16 +10,67 @@ final class ProjectListViewModel {
     var isLoading = true
     var error: String?
 
+    /// True while the list on screen came from the local cache rather than the server.
+    var isShowingCachedCopy = false
+    var cachedAt: Date?
+
+    private var offline: OfflineCoordinator?
+    private var profileId: String?
+    private var store: OfflineStore? { offline?.store }
+    private var prefetchTask: Task<Void, Never>?
+
+    /// Called once by the view; keeps the view model usable without local-first (previews,
+    /// mock harnesses) where both stay nil.
+    func configure(offline: OfflineCoordinator?, profileId: String?) {
+        self.offline = offline
+        self.profileId = profileId
+    }
+
+    /// Cache first, then the server. A failed refresh keeps whatever is on screen: losing
+    /// the whole list because a pull-to-refresh timed out is worse than a stale list.
     func load(using client: PlankaClient) async {
         isLoading = true
         error = nil
         defer { isLoading = false }
+
+        // Send before receiving, so the list that comes back already accounts for
+        // anything queued (a pull-to-refresh is the user asking for exactly that).
+        if let offline, let profileId {
+            await offline.syncNow(profileId: profileId, client: client)
+        }
+
+        if payload == nil, let store, let profileId,
+           let cached = try? await store.projects(profileId: profileId)
+        {
+            payload = cached
+            isShowingCachedCopy = true
+            cachedAt = try? await store.projectsCachedAt(profileId: profileId)
+            resolveCurrentUser(in: cached, client: client)
+            await loadCachedCardCounts(for: cached)
+        }
+
         do {
-            let payload = try await client.getProjects()
-            self.payload = payload
-            resolveCurrentUser(in: payload, client: client)
+            let fresh = try await client.getProjects()
+            payload = fresh
+            isShowingCachedCopy = false
+            error = nil
+            offline?.noteSuccess()
+            resolveCurrentUser(in: fresh, client: client)
+            // Counts are per-board fetches cached for the session; a refresh is the user
+            // asking for current numbers, so drop them and let the visible rows reload.
+            cardCounts = [:]
+            if let store, let profileId {
+                try? await store.cache(projects: fresh, profileId: profileId)
+                cachedAt = Date()
+                prefetchBoards(in: fresh, using: client)
+            }
         } catch {
-            self.error = localizedErrorMessage(error)
+            offline?.noteFailure(error)
+            if payload != nil {
+                isShowingCachedCopy = true
+            } else {
+                self.error = localizedErrorMessage(error)
+            }
         }
     }
 
@@ -27,11 +78,60 @@ final class ProjectListViewModel {
     /// count endpoint, so each count is a full `getBoard` — loaded lazily when the
     /// row appears (not eagerly for every board) and cached for the session, to
     /// avoid a request burst across all projects on large instances.
+    ///
+    /// The fetched payload is written to the local store on the way past, so opening the
+    /// list also makes those boards readable offline.
     func loadCardCount(_ boardId: String, using client: PlankaClient) async {
         guard cardCounts[boardId] == nil else { return }
+        if let store, let profileId,
+           let cached = try? await store.cardCount(boardId: boardId, profileId: profileId)
+        {
+            cardCounts[boardId] = cached
+        }
+        guard offline?.isOnline ?? true else { return }
         if let board = try? await client.getBoard(id: boardId) {
             cardCounts[boardId] = board.cards.count
+            if let store, let profileId {
+                try? await store.cache(board, profileId: profileId)
+            }
         }
+    }
+
+    private func loadCachedCardCounts(for payload: ProjectsPayload) async {
+        guard let store, let profileId else { return }
+        for board in payload.boards where cardCounts[board.id] == nil {
+            if let count = try? await store.cardCount(boardId: board.id, profileId: profileId) {
+                cardCounts[board.id] = count
+            }
+        }
+    }
+
+    /// Fills the cache with the boards not yet in it, so every board — not only the ones
+    /// that have been opened — is readable offline.
+    ///
+    /// Strictly serial and background priority: the point of the lazy per-row counts is to
+    /// avoid a request burst on large instances (see CLAUDE.md), and this must not
+    /// reintroduce one. It also stops as soon as a request fails.
+    private func prefetchBoards(in payload: ProjectsPayload, using client: PlankaClient) {
+        guard let store, let profileId else { return }
+        prefetchTask?.cancel()
+        prefetchTask = Task(priority: .background) { [weak self] in
+            guard let cached = try? await store.cachedBoardIds(profileId: profileId) else { return }
+            let missing = payload.boards.map(\.id).filter { !cached.contains($0) }
+            guard !missing.isEmpty else { return }
+            BoardlyLog.tag(.sync).icon("📦").info(
+                "Caching boards for offline use", metadata: ["count": missing.count])
+            for boardId in missing {
+                if Task.isCancelled { return }
+                guard let board = try? await client.getBoard(id: boardId) else { return }
+                try? await store.cache(board, profileId: profileId)
+                await self?.noteCardCount(boardId: boardId, count: board.cards.count)
+            }
+        }
+    }
+
+    private func noteCardCount(boardId: String, count: Int) {
+        cardCounts[boardId] = count
     }
 
     private func resolveCurrentUser(in payload: ProjectsPayload, client: PlankaClient) {
@@ -48,6 +148,8 @@ func projectColor(_ id: String) -> Color {
 struct ProjectListView: View {
     let client: PlankaClient
     @Binding var path: [AppRoute]
+    @Environment(OfflineCoordinator.self) private var offline
+    @Environment(ProfileStore.self) private var profileStore
     @State private var viewModel = ProjectListViewModel()
     @State private var query = ""
 
@@ -66,18 +168,24 @@ struct ProjectListView: View {
             }
         } content: {
             Group {
-                if viewModel.payload == nil, viewModel.error == nil {
-                    ProgressView().tint(.accentColor).frame(maxWidth: .infinity, maxHeight: .infinity)
+                // A loaded list wins over an error: a failed refresh must not replace the
+                // boards on screen with an error screen — it only means the list is stale.
+                if let payload = viewModel.payload {
+                    content(payload)
                 } else if let error = viewModel.error {
                     ContentUnavailableView(error, systemImage: "exclamationmark.triangle")
-                } else if let payload = viewModel.payload {
-                    content(payload)
+                } else {
+                    ProgressView().tint(.accentColor).frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         }
         .navigationTitle("")
         .toolbar(.hidden, for: .navigationBar)
-        .task { await viewModel.load(using: client) }
+        .task {
+            viewModel.configure(
+                offline: offline, profileId: profileStore.activeProfile?.id.uuidString)
+            await viewModel.load(using: client)
+        }
     }
 
     @ViewBuilder
@@ -90,6 +198,21 @@ struct ProjectListView: View {
             // — each board row loads its card count on appear, bounding the burst.
             LazyVStack(alignment: .leading, spacing: 18) {
                 searchField
+
+                if viewModel.isShowingCachedCopy {
+                    HStack(spacing: 8) {
+                        Image(systemName: "wifi.slash")
+                            .font(.system(size: 11, weight: .semibold))
+                        if let cachedAt = viewModel.cachedAt {
+                            Text("Offline copy from \(cachedAt.formatted(.relative(presentation: .named)))")
+                        } else {
+                            Text("Offline copy")
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .font(.sans(12, .medium))
+                    .foregroundStyle(Color.boardlyTextSecondary)
+                }
 
                 if projects.isEmpty {
                     emptyState

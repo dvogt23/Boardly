@@ -13,6 +13,12 @@ final class BoardViewModel {
     var baseGroups: [BaseCustomFieldGroup] = []
     private var baseFields: [CustomField] = []
 
+    /// Rendering a cached board while offline, and the ids whose changes are still queued
+    /// (so the UI can mark them). Empty when local-first is unavailable.
+    var isShowingCachedCopy = false
+    var cachedAt: Date?
+    var pendingIds: Set<String> = []
+
     private let client: PlankaClient
     let boardId: String
     private var connection: ProfileRealtimeConnection?
@@ -21,9 +27,26 @@ final class BoardViewModel {
     /// stale teardown can't close a newer session's board stream.
     private let realtimeOwner = UUID()
 
-    init(client: PlankaClient, boardId: String) {
+    /// Local-first support. `nil` in previews and in the mock harnesses, where the view
+    /// model talks to a stubbed client and no cache exists — every path below falls back
+    /// to the online-only behaviour when these are absent.
+    private let offline: OfflineCoordinator?
+    private let profileId: String?
+
+    private var store: OfflineStore? { offline?.store }
+    /// Treat "offline" as the monitor's answer; a request may still fail either way.
+    private var isOnline: Bool { offline?.isOnline ?? true }
+
+    init(
+        client: PlankaClient,
+        boardId: String,
+        offline: OfflineCoordinator? = nil,
+        profileId: String? = nil)
+    {
         self.client = client
         self.boardId = boardId
+        self.offline = offline
+        self.profileId = profileId
     }
 
     // MARK: - Real-time sync
@@ -48,10 +71,17 @@ final class BoardViewModel {
             }
             for await event in stream {
                 guard let self else { break }
-                if let current = payload {
-                    payload = current.applying(event)
-                } else if case let .resynced(fresh) = event {
-                    payload = fresh
+                // A resync is server truth for the whole board, so it must go through
+                // `adopt` — assigning it directly would drop rows the user changed
+                // offline (their queued mutations haven't replayed yet).
+                if case let .resynced(fresh) = event {
+                    await adopt(fresh)
+                } else if let current = payload {
+                    let updated = current.applying(event)
+                    payload = updated
+                    // Keep the cache tracking live edits, so leaving and returning
+                    // offline shows what realtime last delivered.
+                    await writeThrough(updated)
                 }
             }
         }
@@ -67,14 +97,110 @@ final class BoardViewModel {
         connection = nil
     }
 
+    /// Cache first, then the server. The cached copy renders immediately (and is all there
+    /// is when offline); a successful fetch replaces it and is written back.
     func load() async {
         isLoading = true
         error = nil
         defer { isLoading = false }
+
+        if payload == nil, let cached = await cachedPayload() {
+            payload = cached
+            isShowingCachedCopy = true
+        }
+
+        // Send before receiving: otherwise the refetch below returns a board that
+        // doesn't know about the local changes, and adopting it looks like data loss.
+        await flushOutbox()
+
         do {
-            payload = try await client.getBoard(id: boardId)
+            let fresh = try await client.getBoard(id: boardId)
+            await adopt(fresh)
+            isShowingCachedCopy = false
+            error = nil
+            // A completed round trip is the authoritative "we're online" signal, and it
+            // kicks the outbox if a missed connectivity transition stranded it.
+            offline?.noteSuccess()
+        } catch {
+            offline?.noteFailure(error)
+            // A cached board is better than an error screen: keep showing it and say so.
+            if payload != nil {
+                isShowingCachedCopy = true
+                BoardlyLog.tag(.sync).icon("📥").info(
+                    "Serving the cached board", metadata: ["board": boardId])
+            } else {
+                self.error = localizedErrorMessage(error)
+            }
+        }
+        await refreshPendingIds()
+    }
+
+    private func cachedPayload() async -> BoardPayload? {
+        guard let store, let profileId else { return nil }
+        cachedAt = try? await store.cachedAt(boardId: boardId, profileId: profileId)
+        return try? await store.payload(boardId: boardId, profileId: profileId)
+    }
+
+    private func writeThrough(_ payload: BoardPayload) async {
+        guard let store, let profileId else { return }
+        try? await store.cache(payload, profileId: profileId)
+        cachedAt = Date()
+    }
+
+    /// Takes server truth for the whole board *and keeps unsynced local work visible*.
+    ///
+    /// Caching prunes what the server no longer has but protects dirty and local-only
+    /// rows, so re-reading the cache afterwards gives the server's board plus the
+    /// changes still sitting in the outbox. Assigning the server payload straight to
+    /// `payload` would make a card created offline vanish from the screen while its
+    /// queued create was still waiting.
+    private func adopt(_ fresh: BoardPayload) async {
+        guard store != nil, profileId != nil else {
+            payload = fresh
+            return
+        }
+        await writeThrough(fresh)
+        if let merged = await cachedPayload() {
+            payload = merged
+        } else {
+            payload = fresh
+        }
+        await refreshPendingIds()
+    }
+
+    /// Pushes queued changes to the server and waits for the run. Called before every
+    /// (re)load, so a pull-to-refresh means "send my changes, then show me the truth"
+    /// rather than just refetching over the top of them.
+    func flushOutbox() async {
+        guard let offline, let profileId else { return }
+        await offline.syncNow(profileId: profileId, client: client)
+        await refreshPendingIds()
+    }
+
+    /// Refreshes the set of ids whose local changes haven't reached the server.
+    func refreshPendingIds() async {
+        guard let store, let profileId else { return }
+        pendingIds = (try? await store.dirtyIds(boardId: boardId, profileId: profileId)) ?? []
+    }
+
+    /// Queues a mutation locally, applies it to the cache, and mirrors it into `payload`
+    /// so the screen updates at once. Used for every write while offline.
+    private func queue(_ mutation: MutationPayload, targetId: String) async -> Bool {
+        guard let store, let profileId else { return false }
+        do {
+            _ = try await store.enqueue(
+                mutation, targetId: targetId, boardId: boardId, profileId: profileId)
+            // Re-read rather than patching `payload` by hand: the store just applied the
+            // same change, so this keeps one implementation of "what does this mutation do".
+            if let updated = try await store.payload(boardId: boardId, profileId: profileId) {
+                payload = updated
+            }
+            await refreshPendingIds()
+            await offline?.refreshPendingCount(profileId: profileId)
+            return true
         } catch {
             self.error = localizedErrorMessage(error)
+            return false
         }
     }
 
@@ -83,16 +209,31 @@ final class BoardViewModel {
     func createCard(in list: PlankaList, name: String) async {
         guard let payload else { return }
         let position = payload.nextCardPosition(in: list)
+        let type = payload.board.defaultCardType ?? "project"
+
+        guard isOnline else {
+            await queue(
+                .createCard(listId: list.id, name: name, position: position, type: type),
+                targetId: "")
+            return
+        }
         do {
             let card = try await client.createCard(
-                listId: list.id,
-                name: name,
-                position: position,
-                type: payload.board.defaultCardType ?? "project")
+                listId: list.id, name: name, position: position, type: type)
             var updated = payload
             updated.cards.append(card)
             self.payload = updated
+            await writeThrough(updated)
         } catch {
+            // Reachability said online but the request didn't land — queue it rather than
+            // making the user retype the card.
+            offline?.noteFailure(error)
+            if isRetryable(error), await queue(
+                .createCard(listId: list.id, name: name, position: position, type: type),
+                targetId: "")
+            {
+                return
+            }
             self.error = localizedErrorMessage(error)
         }
     }
@@ -100,25 +241,55 @@ final class BoardViewModel {
     func moveCard(_ card: Card, to list: PlankaList) async {
         guard let payload else { return }
         let position = payload.nextCardPosition(in: list)
-        do {
-            let updated = try await client.updateCard(
-                id: card.id,
-                patch: CardPatch(listId: list.id, position: position))
-            replaceCard(updated)
-        } catch {
-            self.error = localizedErrorMessage(error)
-        }
+        await updateCard(card, edit: CardEdit(listId: list.id, position: position))
     }
 
     func deleteCard(_ card: Card) async {
         guard let payload else { return }
+        guard isOnline else {
+            await queue(.deleteCard, targetId: card.id)
+            return
+        }
         do {
             try await client.deleteCard(id: card.id)
             var updated = payload
             updated.cards.removeAll { $0.id == card.id }
             self.payload = updated
+            await writeThrough(updated)
         } catch {
+            offline?.noteFailure(error)
+            offline?.noteFailure(error)
+            if isRetryable(error), await queue(.deleteCard, targetId: card.id) { return }
             self.error = localizedErrorMessage(error)
+        }
+    }
+
+    /// The single path every card edit takes, online or queued — `CardEdit` is also what
+    /// the outbox stores, so there is one description of "what changed".
+    func updateCard(_ card: Card, edit: CardEdit) async {
+        guard isOnline else {
+            await queue(.updateCard(edit), targetId: card.id)
+            return
+        }
+        do {
+            let updated = try await client.updateCard(id: card.id, patch: edit.patch)
+            replaceCard(updated)
+            if let payload { await writeThrough(payload) }
+        } catch {
+            offline?.noteFailure(error)
+            offline?.noteFailure(error)
+            if isRetryable(error), await queue(.updateCard(edit), targetId: card.id) { return }
+            self.error = localizedErrorMessage(error)
+        }
+    }
+
+    /// Whether a failed request is worth queueing rather than surfacing: transport and
+    /// server-side faults are, a refusal (401/403/404/409/422) is not.
+    private func isRetryable(_ error: Error) -> Bool {
+        guard store != nil else { return false }
+        return switch error as? PlankaAPIError {
+        case .networkError, .instanceUnreachable, .serverError: true
+        default: false
         }
     }
 
@@ -143,12 +314,19 @@ final class BoardViewModel {
     // MARK: - Task CRUD
 
     func toggleTask(_ task: PlankaTask) async {
+        let edit = TaskEdit(isCompleted: !task.isCompleted)
+        guard isOnline else {
+            await queue(.updateTask(edit), targetId: task.id)
+            return
+        }
         do {
-            let updated = try await client.updateTask(
-                id: task.id,
-                patch: TaskPatch(isCompleted: !task.isCompleted))
+            let updated = try await client.updateTask(id: task.id, patch: edit.patch)
             replaceTask(updated)
+            if let payload { await writeThrough(payload) }
         } catch {
+            offline?.noteFailure(error)
+            offline?.noteFailure(error)
+            if isRetryable(error), await queue(.updateTask(edit), targetId: task.id) { return }
             self.error = localizedErrorMessage(error)
         }
     }
@@ -156,27 +334,45 @@ final class BoardViewModel {
     func createTask(in taskList: TaskList, name: String) async {
         guard let payload else { return }
         let position = (payload.tasks(for: taskList).last?.position ?? 0) + 65536
+        guard isOnline else {
+            await queue(
+                .createTask(taskListId: taskList.id, name: name, position: position), targetId: "")
+            return
+        }
         do {
             let task = try await client.createTask(
-                taskListId: taskList.id,
-                name: name,
-                position: position)
+                taskListId: taskList.id, name: name, position: position)
             var updated = payload
             updated.tasks.append(task)
             self.payload = updated
+            await writeThrough(updated)
         } catch {
+            offline?.noteFailure(error)
+            if isRetryable(error), await queue(
+                .createTask(taskListId: taskList.id, name: name, position: position), targetId: "")
+            {
+                return
+            }
             self.error = localizedErrorMessage(error)
         }
     }
 
     func deleteTask(_ task: PlankaTask) async {
         guard let payload else { return }
+        guard isOnline else {
+            await queue(.deleteTask, targetId: task.id)
+            return
+        }
         do {
             try await client.deleteTask(id: task.id)
             var updated = payload
             updated.tasks.removeAll { $0.id == task.id }
             self.payload = updated
+            await writeThrough(updated)
         } catch {
+            offline?.noteFailure(error)
+            offline?.noteFailure(error)
+            if isRetryable(error), await queue(.deleteTask, targetId: task.id) { return }
             self.error = localizedErrorMessage(error)
         }
     }
@@ -502,22 +698,51 @@ final class BoardViewModel {
     }
 
     /// Returns nil on failure (so the UI can distinguish "empty" from "couldn't load").
+    /// Cache first, like the board itself: cached comments show while offline, and a
+    /// successful fetch is written back.
     func loadComments(cardId: String) async -> [Comment]? {
         do {
-            return try await client.getComments(cardId: cardId)
+            let comments = try await client.getComments(cardId: cardId)
                 .sorted { ($0.createdAt ?? .distantPast) < ($1.createdAt ?? .distantPast) }
+            if let store, let profileId {
+                try? await store.cache(
+                    comments: comments, cardId: cardId, boardId: boardId, profileId: profileId)
+                // Merge back so a comment posted offline stays visible alongside them.
+                return try? await store.comments(cardId: cardId, profileId: profileId)
+            }
+            return comments
         } catch {
+            if let cached = await cachedComments(cardId: cardId), !cached.isEmpty {
+                return cached
+            }
             self.error = localizedErrorMessage(error)
             return nil
         }
     }
 
+    private func cachedComments(cardId: String) async -> [Comment]? {
+        guard let store, let profileId else { return nil }
+        return try? await store.comments(cardId: cardId, profileId: profileId)
+    }
+
     func postComment(cardId: String, text: String) async -> Comment? {
+        guard isOnline else {
+            guard await queue(.createComment(cardId: cardId, text: text), targetId: cardId)
+            else { return nil }
+            adjustCommentsTotal(cardId: cardId, by: 1)
+            return await cachedComments(cardId: cardId)?.last
+        }
         do {
             let comment = try await client.createComment(cardId: cardId, text: text)
             adjustCommentsTotal(cardId: cardId, by: 1)
             return comment
         } catch {
+            if isRetryable(error),
+               await queue(.createComment(cardId: cardId, text: text), targetId: cardId)
+            {
+                adjustCommentsTotal(cardId: cardId, by: 1)
+                return await cachedComments(cardId: cardId)?.last
+            }
             self.error = localizedErrorMessage(error)
             return nil
         }

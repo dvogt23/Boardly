@@ -4,6 +4,8 @@ import SwiftUI
 @main
 struct BoardlyApp: App {
     @State private var profileStore = ProfileStore()
+    /// Local-first cache + outbox, owned for the app's lifetime (see OfflineCoordinator).
+    @State private var offline = OfflineCoordinator()
     @AppStorage(AppTheme.storageKey) private var appearanceRaw = AppTheme.system.rawValue
 
     init() {
@@ -38,10 +40,16 @@ struct BoardlyApp: App {
                 } else if CommandLine.arguments.contains("-mockEditProject") {
                     MockEditProjectHarness()
                 } else {
-                    RootView().environment(profileStore).preferredColorScheme(colorScheme)
+                    RootView()
+                        .environment(profileStore)
+                        .environment(offline)
+                        .preferredColorScheme(colorScheme)
                 }
             #else
-                RootView().environment(profileStore).preferredColorScheme(colorScheme)
+                RootView()
+                        .environment(profileStore)
+                        .environment(offline)
+                        .preferredColorScheme(colorScheme)
             #endif
         }
     }
