@@ -578,7 +578,7 @@ struct CardDetailView: View {
                 HStack(alignment: .top, spacing: 10) {
                     AvatarView(name: author?.name ?? "?", size: 28, bordered: false)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(actionText(action, author: author))
+                        Text(actionText(action, author: author, payload: payload))
                             .font(.boardlyCallout)
                             .foregroundStyle(Color.boardlyInk)
                         if let date = action.createdAt {
@@ -593,17 +593,40 @@ struct CardDetailView: View {
         }
     }
 
-    private func actionText(_ action: Action, author: User?) -> String {
-        let who = author?.name ?? "Someone"
+    /// One localized format per phrase, with the actor and list names inserted as data
+    /// — so translators own the word order (German puts the verb last).
+    private func actionText(
+        _ action: Action,
+        author: User?,
+        payload: BoardPayload) -> LocalizedStringResource
+    {
+        let who = author?.name ?? String(localized: "Someone")
         switch action.type {
         case "createCard": return "\(who) created the card"
-        case "moveCard": return "\(who) moved the card"
+        case "moveCard":
+            // Name both ends when we can resolve them; otherwise stay vague rather
+            // than claim a move from "Untitled" to "Untitled".
+            if let move = action.listMove,
+               let from = listName(id: move.fromId, recorded: move.fromName, in: payload),
+               let to = listName(id: move.toId, recorded: move.toName, in: payload)
+            {
+                return "\(who) moved the card from \(from) to \(to)"
+            }
+            return "\(who) moved the card"
         case "addMemberToCard": return "\(who) added a member"
         case "removeMemberFromCard": return "\(who) removed a member"
         case "completeTask": return "\(who) completed a task"
         case "uncompleteTask": return "\(who) reopened a task"
         default: return "\(who) updated the card"
         }
+    }
+
+    /// A list's display name for the activity line: what PLANKA recorded at the time
+    /// (it survives a later rename), else the board's current name for that id.
+    private func listName(id: String?, recorded: String?, in payload: BoardPayload) -> String? {
+        if let recorded, !recorded.isEmpty { return recorded }
+        guard let id, let list = payload.lists.first(where: { $0.id == id }) else { return nil }
+        return (list.name?.isEmpty == false) ? list.name : nil
     }
 
     private func commentsSection(card: Card) -> some View {
