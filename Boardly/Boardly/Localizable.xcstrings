@@ -3,6 +3,12 @@
   "strings" : {
     "" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19,6 +25,12 @@
     },
     "Untitled" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ohne Titel"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35,6 +47,12 @@
     },
     "·" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "·"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -51,6 +69,12 @@
     },
     "· %@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "· %@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -67,6 +91,12 @@
     },
     "« %@ »" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„%@“"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83,6 +113,12 @@
     },
     "@%@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@%@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -99,6 +135,12 @@
     },
     "%@ · %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ · %lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -115,6 +157,12 @@
     },
     "%lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -131,6 +179,24 @@
     },
     "%lld boards" : {
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Board"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Boards"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -171,6 +237,24 @@
     },
     "%lld cards" : {
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Karte"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Karten"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -211,6 +295,24 @@
     },
     "%lld fields" : {
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Feld"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Felder"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -251,6 +353,24 @@
     },
     "%lld lists" : {
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Liste"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Listen"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -291,6 +411,12 @@
     },
     "%lld/%lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -307,6 +433,12 @@
     },
     "••••••••" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "••••••••"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -323,6 +455,12 @@
     },
     "+ Label" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+ Label"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -339,6 +477,12 @@
     },
     "+%lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -355,6 +499,12 @@
     },
     "587" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "587"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -371,6 +521,12 @@
     },
     "A Keychain error occurred." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist ein Schlüsselbund-Fehler aufgetreten."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -387,6 +543,12 @@
     },
     "A network error occurred. Check your connection." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist ein Netzwerkfehler aufgetreten. Prüfen Sie Ihre Verbindung."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -403,6 +565,12 @@
     },
     "Access token (optional)" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zugriffstoken (optional)"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -420,6 +588,12 @@
     "Account & Server" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto & Server"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -436,6 +610,12 @@
     },
     "Activity" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivität"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -452,6 +632,12 @@
     },
     "Add" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -468,6 +654,12 @@
     },
     "Add a card" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karte hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -484,6 +676,12 @@
     },
     "Add a comment…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kommentar hinzufügen…"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -500,6 +698,12 @@
     },
     "Add a description…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschreibung hinzufügen…"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -516,6 +720,12 @@
     },
     "Add a due date" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fälligkeitsdatum hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -532,6 +742,12 @@
     },
     "Add a Server" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -548,6 +764,12 @@
     },
     "Add a task" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgabe hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -564,6 +786,12 @@
     },
     "Add a value…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wert hinzufügen…"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -580,6 +808,12 @@
     },
     "Add card" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karte hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -596,6 +830,12 @@
     },
     "Add Field" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feld hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -612,6 +852,12 @@
     },
     "Add Group" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppe hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -628,6 +874,12 @@
     },
     "Add lists to this board from the web app." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fügen Sie diesem Board Listen über die Web-App hinzu."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -644,6 +896,12 @@
     },
     "Add Manager" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -660,6 +918,12 @@
     },
     "Add project" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -676,6 +940,12 @@
     },
     "Add Service" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dienst hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -692,6 +962,12 @@
     },
     "Add Webhook" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webhook hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -708,6 +984,12 @@
     },
     "Administrator" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrator"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -724,6 +1006,12 @@
     },
     "Admins only." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur für Administratoren."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -741,6 +1029,12 @@
     "All" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -757,6 +1051,12 @@
     },
     "All Projects" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Projekte"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -773,6 +1073,12 @@
     },
     "Appearance" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erscheinungsbild"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -789,6 +1095,12 @@
     },
     "Apply" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anwenden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -805,6 +1117,12 @@
     },
     "At least one manager must remain to keep this project private." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mindestens ein Manager muss bleiben, damit dieses Projekt privat bleibt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -822,6 +1140,12 @@
     "Attach" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anhängen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -839,6 +1163,12 @@
     "Attachments" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anhänge"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -855,6 +1185,12 @@
     },
     "Back" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -872,6 +1208,12 @@
     "Background" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hintergrund"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -888,6 +1230,12 @@
     },
     "Board" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -905,6 +1253,12 @@
     "Board fields" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board-Felder"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -921,6 +1275,12 @@
     },
     "Board members" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board-Mitglieder"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -937,6 +1297,12 @@
     },
     "Board members · %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board-Mitglieder · %lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -953,6 +1319,12 @@
     },
     "Board menu" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board-Menü"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -969,6 +1341,12 @@
     },
     "Board name" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board-Name"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -985,6 +1363,12 @@
     },
     "Boardly" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boardly"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1001,6 +1385,12 @@
     },
     "Boardly will send your notifications to these external services (Apprise, chat, webhook…)." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boardly sendet Ihre Benachrichtigungen an diese externen Dienste (Apprise, Chat, Webhook…)."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1018,6 +1408,12 @@
     "Boards" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boards"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1034,6 +1430,12 @@
     },
     "Boards · %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boards · %lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1050,6 +1452,12 @@
     },
     "Cancel" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1066,6 +1474,12 @@
     },
     "Card title" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kartentitel"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1082,6 +1496,12 @@
     },
     "cardCreate, cardUpdate" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cardCreate, cardUpdate"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1099,6 +1519,12 @@
     "Cards" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1115,6 +1541,12 @@
     },
     "Cards, boards, and projects" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karten, Boards und Projekte"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1131,6 +1563,12 @@
     },
     "Clear filters" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter zurücksetzen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1147,6 +1585,12 @@
     },
     "Close" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1163,6 +1607,12 @@
     },
     "Coming soon" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bald verfügbar"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1179,6 +1629,12 @@
     },
     "Comments · %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kommentare · %lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1195,6 +1651,12 @@
     },
     "Connect Boardly to your self-hosted PLANKA instance." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbinden Sie Boardly mit Ihrer selbst gehosteten PLANKA-Instanz."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1211,6 +1673,12 @@
     },
     "Continue with SSO" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit SSO fortfahren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1227,6 +1695,12 @@
     },
     "Could not construct a valid URL." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es konnte keine gültige URL erstellt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1243,6 +1717,12 @@
     },
     "Could not reach a PLANKA instance at that URL." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unter dieser URL war keine PLANKA-Instanz erreichbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1259,6 +1739,12 @@
     },
     "Couldn’t add the field." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Feld konnte nicht hinzugefügt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1275,6 +1761,12 @@
     },
     "Couldn’t add the group." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Gruppe konnte nicht hinzugefügt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1291,6 +1783,12 @@
     },
     "Couldn’t add the manager." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Manager konnte nicht hinzugefügt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1307,6 +1805,12 @@
     },
     "Couldn't add the service." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Dienst konnte nicht hinzugefügt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1323,6 +1827,12 @@
     },
     "Couldn’t change the background." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Hintergrund konnte nicht geändert werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1339,6 +1849,12 @@
     },
     "Couldn’t change visibility." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Sichtbarkeit konnte nicht geändert werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1355,6 +1871,12 @@
     },
     "Couldn't create the webhook." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Webhook konnte nicht erstellt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1371,6 +1893,12 @@
     },
     "Couldn’t delete the group." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Gruppe konnte nicht gelöscht werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1387,6 +1915,12 @@
     },
     "Couldn’t delete the project." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Projekt konnte nicht gelöscht werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1403,6 +1937,12 @@
     },
     "Couldn't delete the service." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Dienst konnte nicht gelöscht werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1419,6 +1959,12 @@
     },
     "Couldn't delete the webhook." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Webhook konnte nicht gelöscht werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1435,6 +1981,12 @@
     },
     "Couldn’t index the search." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Suche konnte nicht indexiert werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1451,6 +2003,12 @@
     },
     "Couldn’t load notifications." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen konnten nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1467,6 +2025,12 @@
     },
     "Couldn't load the configuration." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Konfiguration konnte nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1483,6 +2047,12 @@
     },
     "Couldn't load the webhooks." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Webhooks konnten nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1499,6 +2069,12 @@
     },
     "Couldn't load your profile." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihr Profil konnte nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1515,6 +2091,12 @@
     },
     "Couldn’t mark all as read." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es konnten nicht alle als gelesen markiert werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1531,6 +2113,12 @@
     },
     "Couldn’t reach the PLANKA server. Check the address and try again." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der PLANKA-Server war nicht erreichbar. Prüfen Sie die Adresse und versuchen Sie es erneut."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1547,6 +2135,12 @@
     },
     "Couldn’t read the server’s response." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Antwort des Servers konnte nicht gelesen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1563,6 +2157,12 @@
     },
     "Couldn’t remove the background." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Hintergrund konnte nicht entfernt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1579,6 +2179,12 @@
     },
     "Couldn’t remove the manager." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Manager konnte nicht entfernt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1595,6 +2201,12 @@
     },
     "Couldn’t save card" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karte konnte nicht gespeichert werden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1611,6 +2223,12 @@
     },
     "Couldn’t save the project." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Projekt konnte nicht gespeichert werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1627,6 +2245,12 @@
     },
     "Couldn't save your preference." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre Einstellung konnte nicht gespeichert werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1643,6 +2267,12 @@
     },
     "Couldn't save." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern nicht möglich."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1659,6 +2289,12 @@
     },
     "Couldn't send the test (SMTP must be configured through the UI)." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Test konnte nicht gesendet werden (SMTP muss über die Oberfläche konfiguriert werden)."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1675,6 +2311,12 @@
     },
     "Couldn't send the test." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Test konnte nicht gesendet werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1691,6 +2333,12 @@
     },
     "Couldn't update the service." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Dienst konnte nicht aktualisiert werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1707,6 +2355,12 @@
     },
     "Create" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstellen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1723,6 +2377,12 @@
     },
     "Create Label" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label erstellen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1739,6 +2399,12 @@
     },
     "Credentials" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmeldedaten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1755,6 +2421,12 @@
     },
     "Custom Fields" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzerdefinierte Felder"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1771,6 +2443,12 @@
     },
     "Dark" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dunkel"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1787,6 +2465,12 @@
     },
     "Delete" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1803,6 +2487,12 @@
     },
     "Delete all boards before you can delete this project." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen Sie alle Boards, bevor Sie dieses Projekt löschen können."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1819,6 +2509,12 @@
     },
     "Delete board" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1835,6 +2531,12 @@
     },
     "Delete board?" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board löschen?"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1851,6 +2553,12 @@
     },
     "Delete Card" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karte löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1867,6 +2575,12 @@
     },
     "Delete field" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feld löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1883,6 +2597,12 @@
     },
     "Delete Group" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppe löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1899,6 +2619,12 @@
     },
     "Delete Project" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1915,6 +2641,12 @@
     },
     "Delete Server" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1931,6 +2663,12 @@
     },
     "Delete service" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dienst löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1947,6 +2685,12 @@
     },
     "Delete webhook" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webhook löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1963,6 +2707,12 @@
     },
     "Description" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschreibung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1979,6 +2729,12 @@
     },
     "Display name (optional)" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeigename (optional)"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1995,6 +2751,12 @@
     },
     "Due date" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fälligkeitsdatum"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2011,6 +2773,12 @@
     },
     "Due Date" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fälligkeitsdatum"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2027,6 +2795,12 @@
     },
     "Earlier" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Früher"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2043,6 +2817,12 @@
     },
     "Edit" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bearbeiten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2059,6 +2839,12 @@
     },
     "Edit project" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt bearbeiten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2075,6 +2861,12 @@
     },
     "Edit Project" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt bearbeiten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2091,6 +2883,12 @@
     },
     "Edit service" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dienst bearbeiten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2107,6 +2905,12 @@
     },
     "email or username" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-Mail oder Benutzername"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2123,6 +2927,12 @@
     },
     "Empty" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2139,6 +2949,12 @@
     },
     "Error" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2155,6 +2971,12 @@
     },
     "Events (comma-separated, empty = all)" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ereignisse (kommagetrennt, leer = alle)"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2171,6 +2993,12 @@
     },
     "Export CSV" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CSV exportieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2187,6 +3015,12 @@
     },
     "Failed to upload the background image." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Hintergrundbild konnte nicht hochgeladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2203,6 +3037,12 @@
     },
     "Favorites" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2219,6 +3059,12 @@
     },
     "Field name" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feldname"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2235,6 +3081,12 @@
     },
     "Filter and sort" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtern und sortieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2251,6 +3103,12 @@
     },
     "Filters" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2267,6 +3125,12 @@
     },
     "for “%@”" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "für „%@“"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2283,6 +3147,12 @@
     },
     "Forgot password?" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passwort vergessen?"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2299,6 +3169,12 @@
     },
     "Format" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Format"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2315,6 +3191,12 @@
     },
     "Free text · up to 512 characters per field. Clearing a field deletes its value." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Freitext · bis zu 512 Zeichen pro Feld. Ein geleertes Feld löscht seinen Wert."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2332,6 +3214,12 @@
     "General" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allgemein"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2349,6 +3237,12 @@
     "Gradients" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farbverläufe"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2366,6 +3260,12 @@
     "Grid" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raster"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2382,6 +3282,12 @@
     },
     "Group name" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppenname"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2398,6 +3304,12 @@
     },
     "Grouped" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2414,6 +3326,12 @@
     },
     "Hide from the projects list and favorites" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In der Projektliste und den Favoriten ausblenden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2430,6 +3348,12 @@
     },
     "Home View" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Startansicht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2446,6 +3370,12 @@
     },
     "HTML" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTML"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2462,6 +3392,12 @@
     },
     "https://…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://…"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2478,6 +3414,12 @@
     },
     "https://planka.example.com" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://planka.example.com"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2495,6 +3437,12 @@
     "Image" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2511,6 +3459,12 @@
     },
     "Import an Image" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild importieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2527,6 +3481,12 @@
     },
     "Indexing…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indexierung…"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2544,6 +3504,12 @@
     "Inherited from project" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vom Projekt geerbt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2560,6 +3526,12 @@
     },
     "Invalid email/username or password." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-Mail/Benutzername oder Passwort ungültig."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2576,6 +3548,12 @@
     },
     "Invalid URL format." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungültiges URL-Format."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2593,6 +3571,12 @@
     "Kanban" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kanban"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2609,6 +3593,12 @@
     },
     "Labels" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Labels"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2625,6 +3615,12 @@
     },
     "Light" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hell"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2642,6 +3638,12 @@
     "List" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2658,6 +3660,12 @@
     },
     "Log In" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmelden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2674,6 +3682,12 @@
     },
     "Log Out" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abmelden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2690,6 +3704,12 @@
     },
     "Login" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmeldung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2706,6 +3726,12 @@
     },
     "Login is restricted. Check with your administrator." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Anmeldung ist eingeschränkt. Wenden Sie sich an Ihren Administrator."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2722,6 +3748,12 @@
     },
     "Manager" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2738,6 +3770,12 @@
     },
     "Manager · you" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager · Sie"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2755,6 +3793,12 @@
     "Managers" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2771,6 +3815,12 @@
     },
     "Managers · %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager · %lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2787,6 +3837,12 @@
     },
     "Mark all as read" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle als gelesen markieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2803,6 +3859,12 @@
     },
     "Mark task complete" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgabe als erledigt markieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2819,6 +3881,12 @@
     },
     "Mark task incomplete" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgabe als nicht erledigt markieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2835,6 +3903,12 @@
     },
     "Markdown" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markdown"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2851,6 +3925,12 @@
     },
     "Markdown Editor" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markdown-Editor"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2867,6 +3947,12 @@
     },
     "Member" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitglied"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2883,6 +3969,12 @@
     },
     "Members" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitglieder"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2900,6 +3992,12 @@
     "Move to" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verschieben nach"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2916,6 +4014,12 @@
     },
     "My server" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mein Server"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2932,6 +4036,12 @@
     },
     "My webhook" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mein Webhook"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2948,6 +4058,12 @@
     },
     "Name" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2964,6 +4080,12 @@
     },
     "Name (optional)" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name (optional)"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2980,6 +4102,12 @@
     },
     "Network error during SSO login." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netzwerkfehler bei der SSO-Anmeldung."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2996,6 +4124,12 @@
     },
     "Network error. Check the URL and your connection." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netzwerkfehler. Prüfen Sie die URL und Ihre Verbindung."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3012,6 +4146,12 @@
     },
     "Network error. Please check your connection." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3028,6 +4168,12 @@
     },
     "New Board" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Board"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3044,6 +4190,12 @@
     },
     "New Card" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Karte"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3060,6 +4212,12 @@
     },
     "New Field" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Feld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3076,6 +4234,12 @@
     },
     "New Group" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Gruppe"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3092,6 +4256,12 @@
     },
     "New Label" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Label"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3108,6 +4278,12 @@
     },
     "NEW SERVER" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEUER SERVER"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3124,6 +4300,12 @@
     },
     "New Service" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Dienst"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3140,6 +4322,12 @@
     },
     "New task" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Aufgabe"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3157,6 +4345,12 @@
     "New Webhook" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Webhook"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3173,6 +4367,12 @@
     },
     "No background" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Hintergrund"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3189,6 +4389,12 @@
     },
     "No comments yet." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch keine Kommentare."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3205,6 +4411,12 @@
     },
     "No due date" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Fälligkeitsdatum"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3221,6 +4433,12 @@
     },
     "No fields" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Felder"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3237,6 +4455,12 @@
     },
     "No lists" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Listen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3253,6 +4477,12 @@
     },
     "No members to add" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Mitglieder zum Hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3269,6 +4499,12 @@
     },
     "No notifications" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Benachrichtigungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3285,6 +4521,12 @@
     },
     "No project members to add." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Projektmitglieder zum Hinzufügen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3301,6 +4543,12 @@
     },
     "No projects" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Projekte"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3317,6 +4565,12 @@
     },
     "No projects on this server." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Projekte auf diesem Server."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3333,6 +4587,12 @@
     },
     "No results" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Ergebnisse"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3349,6 +4609,12 @@
     },
     "No services configured" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Dienste konfiguriert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3365,6 +4631,12 @@
     },
     "No webhooks configured." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Webhooks konfiguriert."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3381,6 +4653,12 @@
     },
     "no-reply@example.com" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no-reply@example.com"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3397,6 +4675,12 @@
     },
     "Notifications" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3414,6 +4698,12 @@
     "OIDC: authorization URL could not be parsed. authorizationUrl = %@" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OIDC: Die Autorisierungs-URL konnte nicht ausgewertet werden. authorizationUrl = %@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3430,6 +4720,12 @@
     },
     "OK" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3446,6 +4742,12 @@
     },
     "On this card · %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf dieser Karte · %lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3462,6 +4764,12 @@
     },
     "or" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "oder"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3478,6 +4786,12 @@
     },
     "Overdue" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überfällig"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3495,6 +4809,12 @@
     "Password" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passwort"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3511,6 +4831,12 @@
     },
     "Paste a link" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link einfügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3527,6 +4853,12 @@
     },
     "Port" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Port"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3544,6 +4876,12 @@
     "Preferences" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3561,6 +4899,12 @@
     "Preview" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorschau"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3577,6 +4921,12 @@
     },
     "Profile" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3593,6 +4943,12 @@
     },
     "PROJECT" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PROJEKT"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3609,6 +4965,12 @@
     },
     "Project not found." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt nicht gefunden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3625,6 +4987,12 @@
     },
     "Project Owner" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekteigentümer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3641,6 +5009,12 @@
     },
     "Project team" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projektteam"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3657,6 +5031,12 @@
     },
     "Project title" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekttitel"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3673,6 +5053,12 @@
     },
     "Projects" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekte"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3689,6 +5075,12 @@
     },
     "Remove attachment" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anhang entfernen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3705,6 +5097,12 @@
     },
     "Rename board" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Board umbenennen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3721,6 +5119,12 @@
     },
     "Retry" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erneut versuchen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3737,6 +5141,12 @@
     },
     "Reusable field groups, inherited by every board in the project." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wiederverwendbare Feldgruppen, die jedes Board im Projekt erbt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3753,6 +5163,12 @@
     },
     "Save" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3769,6 +5185,12 @@
     },
     "Search" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suchen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3785,6 +5207,12 @@
     },
     "Search a project or board…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt oder Board suchen…"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3801,6 +5229,12 @@
     },
     "Search members" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitglieder suchen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3817,6 +5251,12 @@
     },
     "Search…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suchen…"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3833,6 +5273,12 @@
     },
     "secret" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "secret"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3849,6 +5295,12 @@
     },
     "Secure connection (TLS)" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sichere Verbindung (TLS)"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3865,6 +5317,12 @@
     },
     "Send comment" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kommentar senden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3881,6 +5339,12 @@
     },
     "Send Test Email" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test-E-Mail senden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3897,6 +5361,12 @@
     },
     "Sender (From)" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Absender (Von)"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3913,6 +5383,12 @@
     },
     "Server" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3929,6 +5405,12 @@
     },
     "Server address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serveradresse"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3945,6 +5427,12 @@
     },
     "Server error (%lld)." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serverfehler (%lld)."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3961,6 +5449,12 @@
     },
     "Servers" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3977,6 +5471,12 @@
     },
     "Service URL" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dienst-URL"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3993,6 +5493,12 @@
     },
     "Set Up a Server" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server einrichten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4009,6 +5515,12 @@
     },
     "SMTP Configuration" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SMTP-Konfiguration"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4025,6 +5537,12 @@
     },
     "SMTP Server" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SMTP-Server"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4041,6 +5559,12 @@
     },
     "smtp.example.com" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "smtp.example.com"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4057,6 +5581,12 @@
     },
     "SSO authentication failed (invalid code or nonce)." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSO-Authentifizierung fehlgeschlagen (ungültiger Code oder Nonce)."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4073,6 +5603,12 @@
     },
     "SSO Login" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSO-Anmeldung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4089,6 +5625,12 @@
     },
     "SSO login was refused by the server." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die SSO-Anmeldung wurde vom Server abgelehnt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4105,6 +5647,12 @@
     },
     "Switch Server" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server wechseln"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4121,6 +5669,12 @@
     },
     "System" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4137,6 +5691,12 @@
     },
     "Text" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4153,6 +5713,12 @@
     },
     "The requested item was not found." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das angeforderte Element wurde nicht gefunden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4169,6 +5735,12 @@
     },
     "The server address is invalid." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Serveradresse ist ungültig."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4185,6 +5757,12 @@
     },
     "The server rejected the request." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Server hat die Anfrage abgelehnt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4201,6 +5779,12 @@
     },
     "This conflicts with the current state. Refresh and try again." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das steht im Konflikt mit dem aktuellen Stand. Aktualisieren Sie und versuchen Sie es erneut."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4217,6 +5801,12 @@
     },
     "This connection isn’t encrypted — your login token will be sent in cleartext." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Verbindung ist nicht verschlüsselt — Ihr Anmeldetoken wird im Klartext übertragen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4233,6 +5823,12 @@
     },
     "This permanently deletes the board and all its cards." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Damit werden das Board und alle seine Karten endgültig gelöscht."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4250,6 +5846,12 @@
     "This week" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Woche"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4266,6 +5868,12 @@
     },
     "Timer" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4283,6 +5891,12 @@
     "Title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titel"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4300,6 +5914,12 @@
     "Today" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heute"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4316,6 +5936,12 @@
     },
     "Try another term." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versuchen Sie einen anderen Begriff."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4332,6 +5958,12 @@
     },
     "Unauthorized — please log in again." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht autorisiert — bitte melden Sie sich erneut an."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4348,6 +5980,12 @@
     },
     "Unreadable image." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild nicht lesbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4364,6 +6002,12 @@
     },
     "updated %@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "aktualisiert %@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4380,6 +6024,12 @@
     },
     "URL" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4396,6 +6046,12 @@
     },
     "username" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzername"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4412,6 +6068,12 @@
     },
     "Username" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzername"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4428,6 +6090,12 @@
     },
     "Webhooks" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webhooks"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4444,6 +6112,12 @@
     },
     "With due date" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit Fälligkeitsdatum"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4460,6 +6134,12 @@
     },
     "WYSIWYG" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WYSIWYG"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4476,6 +6156,12 @@
     },
     "You don’t have permission to do this." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie haben keine Berechtigung dafür."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4492,6 +6178,12 @@
     },
     "You’re all caught up." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie sind auf dem neuesten Stand."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4508,6 +6200,12 @@
     },
     "Your boards, your cards, and your team — together in an app built to keep you moving." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre Boards, Ihre Karten und Ihr Team — vereint in einer App, die Sie in Bewegung hält."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",

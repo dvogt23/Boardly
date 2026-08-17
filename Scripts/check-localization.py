@@ -22,7 +22,9 @@ APP_SOURCES = ROOT / "Boardly/Boardly"
 
 errors: list[str] = []
 
-# 1. Catalog completeness
+# 1. Catalog completeness — every shipped locale, not just the source language.
+TRANSLATED_LOCALES = {"fr": "French", "de": "German"}
+
 catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
 for key, entry in catalog["strings"].items():
     if not key:
@@ -30,8 +32,9 @@ for key, entry in catalog["strings"].items():
     state = entry.get("extractionState")
     if state in ("stale", "needs_review"):
         errors.append(f"catalog: {key!r} is '{state}'")
-    if "fr" not in entry.get("localizations", {}):
-        errors.append(f"catalog: {key!r} has no French translation")
+    for locale, language in TRANSLATED_LOCALES.items():
+        if locale not in entry.get("localizations", {}):
+            errors.append(f"catalog: {key!r} has no {language} translation")
 
 # 2. Divergent source patterns
 ANTI_PATTERNS = [
