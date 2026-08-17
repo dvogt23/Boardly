@@ -107,6 +107,8 @@ private struct BoardScreen: View {
     @State private var selectedCardId: SelectedCard?
     @State private var didFocusCard = false
     @State private var mode: BoardViewMode = .kanban
+    /// The kanban column currently paged into view (nil until the first scroll).
+    @State private var kanbanListId: String?
     @State private var showAddCard = false
     @State private var showCustomFieldsSheet = false
     @State private var showFilters = false
@@ -294,10 +296,42 @@ private struct BoardScreen: View {
             }
             .padding(4)
             .background(Color.boardlySurfaceSecondary, in: RoundedRectangle(cornerRadius: 11, style: .continuous))
-            Spacer(minLength: 0)
+            Spacer(minLength: 8)
+            if mode == .kanban, let lists = viewModel.payload?.sortedLists(), lists.count > 1 {
+                kanbanPageIndicator(lists)
+            }
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
+    }
+
+    /// One dot per kanban column, the current one elongated — the horizontal scroll
+    /// pages column-by-column, so this is the only cue for position in a long board.
+    private func kanbanPageIndicator(_ lists: [PlankaList]) -> some View {
+        HStack(spacing: 5) {
+            ForEach(lists) { list in
+                let active = list.id == activeKanbanListId
+                Button {
+                    withAnimation(.snappy) { kanbanListId = list.id }
+                } label: {
+                    Capsule()
+                        .fill(active ? Color.accentColor : Color.boardlyNeutralFill)
+                        .frame(width: active ? 16 : 6, height: 6)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(list.name.map { Text(verbatim: $0) } ?? Text("Untitled"))
+                .accessibilityAddTraits(active ? [.isButton, .isSelected] : .isButton)
+            }
+        }
+        .animation(.snappy(duration: 0.2), value: activeKanbanListId)
+    }
+
+    /// `kanbanListId` clamped to a list that still exists — a deleted or filtered-out
+    /// column must not leave the indicator with nothing highlighted.
+    private var activeKanbanListId: String? {
+        let lists = viewModel.payload?.sortedLists() ?? []
+        if let kanbanListId, lists.contains(where: { $0.id == kanbanListId }) { return kanbanListId }
+        return lists.first?.id
     }
 
     // MARK: - Content
@@ -329,7 +363,7 @@ private struct BoardScreen: View {
 
     private func kanbanMode(_ payload: BoardPayload) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(alignment: .top, spacing: 16) {
+            HStack(alignment: .top, spacing: 12) {
                 ForEach(payload.sortedLists()) { list in
                     ListColumnView(
                         list: list,
@@ -340,15 +374,23 @@ private struct BoardScreen: View {
                             Task { await viewModel.createCard(in: list, name: name) }
                         },
                         loadImage: { await viewModel.loadImage(url: $0) })
-                        .frame(width: 280)
+                        // One column per page: the container is already inset by
+                        // safeAreaPadding, so the leftover inset shows a sliver of
+                        // the neighbouring column as an affordance to swipe on.
+                        .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 0)
                 }
             }
-            .padding(.horizontal, 20)
+            .scrollTargetLayout()
             .padding(.top, 8)
             // Stretch the columns to the full viewport height so each column's card
             // list scrolls to the bottom edge (under the tab bar), like list / grid.
             .frame(maxHeight: .infinity, alignment: .top)
         }
+        // safeAreaPadding, not .padding on the content: it insets the pages while
+        // keeping each column aligned to the container for snapping.
+        .safeAreaPadding(.horizontal, 20)
+        .scrollTargetBehavior(DeliberateColumnPaging())
+        .scrollPosition(id: $kanbanListId, anchor: .leading)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -424,6 +466,28 @@ private struct BoardScreen: View {
         .accessibilityLabel("Add card")
         .padding(.trailing, 20)
         .padding(.bottom, 20)
+    }
+}
+
+// MARK: - Kanban paging
+
+/// Column paging that takes a deliberate swipe: anything shorter than `threshold` of
+/// the viewport springs back to the column the gesture started on, so a stray nudge
+/// never changes column. The proposed target already folds in the flick velocity, so
+/// a quick short flick still counts as intentional — and `.viewAligned` does the
+/// actual snapping, one column at a time.
+private struct DeliberateColumnPaging: ScrollTargetBehavior {
+    /// Share of the viewport a swipe must aim past before the column changes.
+    private let threshold: CGFloat = 0.35
+
+    func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
+        let start = context.originalTarget.rect.minX
+        if abs(target.rect.minX - start) < threshold * context.containerSize.width {
+            target.rect.origin.x = start
+            return
+        }
+        ViewAlignedScrollTargetBehavior(limitBehavior: .always)
+            .updateTarget(&target, context: context)
     }
 }
 

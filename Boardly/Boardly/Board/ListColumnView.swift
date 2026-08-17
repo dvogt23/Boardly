@@ -1,5 +1,6 @@
 import BoardlyKit
 import SwiftUI
+import UIKit
 
 struct ListColumnView: View {
     let list: PlankaList
@@ -69,7 +70,12 @@ struct ListColumnView: View {
                     addCardButton
                 }
                 .padding(.bottom, 8)
+                // Hard-stops the column at its end (see StopAtEnd); the top stays
+                // free to rubber-band, which is what pull-to-refresh pulls on.
+                .background(StopAtEnd())
             }
+            // `.always`, so even a column with one card can be pulled to refresh.
+            .scrollBounceBehavior(.always, axes: .vertical)
         }
     }
 
@@ -84,6 +90,40 @@ struct ListColumnView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 4)
                 .padding(.vertical, 4)
+        }
+    }
+
+    /// Zero-size probe that clamps the hosting scroll view at its end, so a column can
+    /// never be dragged past its last card — overscrolling there only slides the cards
+    /// up behind the board header. Pulling *down* is left alone (pull-to-refresh), and
+    /// a column shorter than the viewport therefore can't be dragged up at all.
+    /// UIKit has no directional `bounces` flag, hence the offset clamp.
+    private struct StopAtEnd: UIViewRepresentable {
+        func makeUIView(context _: Context) -> UIView { Probe() }
+        func updateUIView(_: UIView, context _: Context) {}
+
+        private final class Probe: UIView {
+            private var observation: NSKeyValueObservation?
+
+            override func didMoveToWindow() {
+                super.didMoveToWindow()
+                guard observation == nil, let scrollView = enclosingScrollView else { return }
+                observation = scrollView.observe(\.contentOffset) { scrollView, _ in
+                    let inset = scrollView.adjustedContentInset
+                    let end = max(
+                        -inset.top, // shorter than the viewport: the resting offset
+                        scrollView.contentSize.height + inset.bottom - scrollView.bounds.height)
+                    if scrollView.contentOffset.y > end {
+                        scrollView.contentOffset.y = end
+                    }
+                }
+            }
+
+            private var enclosingScrollView: UIScrollView? {
+                sequence(first: self as UIView) { $0.superview }
+                    .compactMap { $0 as? UIScrollView }
+                    .first
+            }
         }
     }
 
