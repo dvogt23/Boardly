@@ -84,7 +84,11 @@ final class BoardViewModel {
         guard let payload else { return }
         let position = payload.nextCardPosition(in: list)
         do {
-            let card = try await client.createCard(listId: list.id, name: name, position: position)
+            let card = try await client.createCard(
+                listId: list.id,
+                name: name,
+                position: position,
+                type: payload.board.defaultCardType ?? "project")
             var updated = payload
             updated.cards.append(card)
             self.payload = updated

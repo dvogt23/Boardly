@@ -187,10 +187,17 @@ public struct PlankaClient: Sendable {
 
     // MARK: - Cards
 
-    public func createCard(listId: String, name: String, position: Double) async throws -> Card {
-        struct Body: Encodable { let name: String; let position: Double }
+    /// - Parameter type: PLANKA requires `type` on create (`project` / `story`); pass
+    ///   the board's `defaultCardType`, falling back to PLANKA's own default.
+    public func createCard(
+        listId: String,
+        name: String,
+        position: Double,
+        type: String = "project") async throws -> Card
+    {
+        struct Body: Encodable { let type: String; let name: String; let position: Double }
         struct Response: Decodable { let item: Card }
-        let body = try JSONEncoder().encode(Body(name: name, position: position))
+        let body = try JSONEncoder().encode(Body(type: type, name: name, position: position))
         let request = try buildRequest(method: "POST", path: "/lists/\(listId)/cards", body: body)
         let response: Response = try await execute(request)
         return response.item
