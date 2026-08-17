@@ -17,6 +17,22 @@
         }
       }
     },
+    "Untitled" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Untitled"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans titre"
+          }
+        }
+      }
+    },
     "·" : {
       "localizations" : {
         "en" : {
@@ -686,23 +702,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajouter un webhook"
-          }
-        }
-      }
-    },
-    "Added to “%@”" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Added to “%@”"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouté à « %@ »"
           }
         }
       }
@@ -3413,7 +3412,7 @@
       }
     },
     "OIDC: authorization URL could not be parsed. authorizationUrl = %@" : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4343,23 +4342,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Non autorisé — veuillez vous reconnecter."
-          }
-        }
-      }
-    },
-    "Unexpected error: %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unexpected error: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erreur inattendue : %@"
           }
         }
       }
