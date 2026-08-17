@@ -46,7 +46,7 @@ final class ProjectListViewModel {
             isShowingCachedCopy = true
             cachedAt = try? await store.projectsCachedAt(profileId: profileId)
             resolveCurrentUser(in: cached, client: client)
-            await loadCachedCardCounts(for: cached)
+            await refreshCardCounts(for: cached)
         }
 
         do {
@@ -56,9 +56,10 @@ final class ProjectListViewModel {
             error = nil
             offline?.noteSuccess()
             resolveCurrentUser(in: fresh, client: client)
-            // Counts are per-board fetches cached for the session; a refresh is the user
-            // asking for current numbers, so drop them and let the visible rows reload.
-            cardCounts = [:]
+            // Re-resolve counts from the local cache instead of clearing them: rows only
+            // reload a count when they appear, so emptying the dictionary blanks every row
+            // already on screen until it is scrolled away and back.
+            await refreshCardCounts(for: fresh)
             if let store, let profileId {
                 try? await store.cache(projects: fresh, profileId: profileId)
                 cachedAt = Date()
@@ -97,9 +98,11 @@ final class ProjectListViewModel {
         }
     }
 
-    private func loadCachedCardCounts(for payload: ProjectsPayload) async {
+    /// Counts straight from the cache — no network, and never blanking a number we already
+    /// show: a board the cache has never seen keeps whatever count it had.
+    private func refreshCardCounts(for payload: ProjectsPayload) async {
         guard let store, let profileId else { return }
-        for board in payload.boards where cardCounts[board.id] == nil {
+        for board in payload.boards {
             if let count = try? await store.cardCount(boardId: board.id, profileId: profileId) {
                 cardCounts[board.id] = count
             }
