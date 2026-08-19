@@ -13,6 +13,9 @@ struct CardDetailView: View {
     @State private var newTaskName = ""
     @State private var addingTaskInListId: String?
     @FocusState private var taskFieldFocused: Bool
+    @State private var newTaskListName = ""
+    @State private var isAddingTaskList = false
+    @FocusState private var taskListFieldFocused: Bool
     @State private var didSeedEditState = false
     @State private var showLabelsSheet = false
     @State private var showMembersSheet = false
@@ -146,6 +149,7 @@ struct CardDetailView: View {
                     ForEach(payload.taskLists(for: card)) { taskList in
                         taskListSection(taskList: taskList, payload: payload)
                     }
+                    addTaskListSection(card: card)
 
                     commentsSection(card: card)
                     if !actions.isEmpty { activitySection(payload: payload) }
@@ -475,6 +479,58 @@ struct CardDetailView: View {
         .boardlyCard()
     }
 
+    /// Creates a new checklist on the card. Once created it renders through
+    /// `taskListSection` like any other, so tasks are added the usual way.
+    private func addTaskListSection(card: Card) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            if isAddingTaskList {
+                HStack(spacing: 12) {
+                    Image(systemName: "checklist")
+                        .foregroundStyle(Color.boardlyTextTertiary)
+                        .font(.system(size: 18))
+                    TextField("Checklist name", text: $newTaskListName)
+                        .font(.boardlyBody)
+                        .focused($taskListFieldFocused)
+                        .submitLabel(.done)
+                        .onSubmit { submitTaskList(card: card) }
+                }
+                HStack(spacing: 12) {
+                    Button("Add") { submitTaskList(card: card) }
+                        .font(.sans(14, .semibold))
+                        .disabled(newTaskListName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    Button("Cancel", role: .cancel) {
+                        isAddingTaskList = false
+                        newTaskListName = ""
+                    }
+                    .font(.sans(14))
+                    .foregroundStyle(Color.boardlyTextSecondary)
+                    Spacer(minLength: 0)
+                }
+            } else {
+                Button {
+                    isAddingTaskList = true
+                    newTaskListName = ""
+                    taskListFieldFocused = true
+                } label: {
+                    SwiftUI.Label("Add a checklist", systemImage: "checklist")
+                        .font(.boardlyCallout)
+                        .foregroundStyle(Color.boardlyTextSecondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .boardlyCard()
+    }
+
+    private func submitTaskList(card: Card) {
+        let name = newTaskListName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !name.isEmpty else { return }
+        Task { await boardVM.createTaskList(in: card, name: name) }
+        newTaskListName = ""
+        isAddingTaskList = false
+    }
+
     // MARK: - Comments (read-only count for now; full thread arrives in Phase 4)
 
     private func chronoSection(card: Card) -> some View {
@@ -522,7 +578,7 @@ struct CardDetailView: View {
                 HStack(alignment: .top, spacing: 10) {
                     AvatarView(name: author?.name ?? "?", size: 28, bordered: false)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(actionText(action, author: author))
+                        Text(actionText(action, author: author, payload: payload))
                             .font(.boardlyCallout)
                             .foregroundStyle(Color.boardlyInk)
                         if let date = action.createdAt {
@@ -537,17 +593,40 @@ struct CardDetailView: View {
         }
     }
 
-    private func actionText(_ action: Action, author: User?) -> String {
-        let who = author?.name ?? "Someone"
+    /// One localized format per phrase, with the actor and list names inserted as data
+    /// — so translators own the word order (German puts the verb last).
+    private func actionText(
+        _ action: Action,
+        author: User?,
+        payload: BoardPayload) -> LocalizedStringResource
+    {
+        let who = author?.name ?? String(localized: "Someone")
         switch action.type {
         case "createCard": return "\(who) created the card"
-        case "moveCard": return "\(who) moved the card"
+        case "moveCard":
+            // Name both ends when we can resolve them; otherwise stay vague rather
+            // than claim a move from "Untitled" to "Untitled".
+            if let move = action.listMove,
+               let from = listName(id: move.fromId, recorded: move.fromName, in: payload),
+               let to = listName(id: move.toId, recorded: move.toName, in: payload)
+            {
+                return "\(who) moved the card from \(from) to \(to)"
+            }
+            return "\(who) moved the card"
         case "addMemberToCard": return "\(who) added a member"
         case "removeMemberFromCard": return "\(who) removed a member"
         case "completeTask": return "\(who) completed a task"
         case "uncompleteTask": return "\(who) reopened a task"
         default: return "\(who) updated the card"
         }
+    }
+
+    /// A list's display name for the activity line: what PLANKA recorded at the time
+    /// (it survives a later rename), else the board's current name for that id.
+    private func listName(id: String?, recorded: String?, in payload: BoardPayload) -> String? {
+        if let recorded, !recorded.isEmpty { return recorded }
+        guard let id, let list = payload.lists.first(where: { $0.id == id }) else { return nil }
+        return (list.name?.isEmpty == false) ? list.name : nil
     }
 
     private func commentsSection(card: Card) -> some View {
@@ -730,10 +809,8 @@ private struct CommentBubble: View {
                     }
                     Spacer(minLength: 0)
                 }
-                Text(comment.text)
-                    .font(.boardlyBody)
-                    .foregroundStyle(Color.boardlyInk)
-                    .fixedSize(horizontal: false, vertical: true)
+                // Comment bodies are Markdown in PLANKA — render them as such.
+                MarkdownText(markdown: comment.text)
             }
         }
         .padding(12)

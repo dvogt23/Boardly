@@ -26,6 +26,11 @@ final class BoardSessionStore {
 
     private var entries: [String: Entry] = [:]
 
+    /// Local-first support, handed to every board session this store creates. Set once by
+    /// the view that owns the store (see MainView); nil in tests and mock harnesses.
+    var offline: OfflineCoordinator?
+    var profileId: String?
+
     /// The one Socket.IO connection shared by every board of this profile (Tier 1).
     /// Built lazily on the first board that has a token; reused across boards, and
     /// reconnected if all boards close and one later reopens.
@@ -46,7 +51,8 @@ final class BoardSessionStore {
             entry.refCount += 1
             return entry.viewModel
         }
-        let viewModel = BoardViewModel(client: client, boardId: boardId)
+        let viewModel = BoardViewModel(
+            client: client, boardId: boardId, offline: offline, profileId: profileId)
         entries[boardId] = Entry(viewModel: viewModel)
         if let connection = connection(for: client) {
             viewModel.startRealtime(using: connection)

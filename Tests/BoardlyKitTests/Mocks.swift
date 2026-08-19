@@ -7,14 +7,28 @@ final class MockHTTPClient: HTTPClient, @unchecked Sendable {
     var stubbedResponse: (Data, HTTPURLResponse)?
     var stubbedError: Error?
     private(set) var lastRequest: URLRequest?
+    /// Every request in order — for flows that send more than one (outbox replay).
+    private(set) var requests: [URLRequest] = []
+    /// Set to answer per request instead of with a single stub; the index is the
+    /// request's position in the run.
+    var handler: ((_ request: URLRequest, _ index: Int) throws -> (Data, HTTPURLResponse))?
 
     func data(for request: URLRequest) async throws -> (Data, URLResponse) {
         lastRequest = request
+        requests.append(request)
+        if let handler { return try handler(request, requests.count - 1) }
         if let error = stubbedError { throw error }
         guard let response = stubbedResponse else {
             throw URLError(.badServerResponse)
         }
         return (response.0, response.1)
+    }
+
+    /// Builds a response the way `stub(json:)` does, for use inside `handler`.
+    func response(json: String, statusCode: Int = 200) -> (Data, HTTPURLResponse) {
+        (Data(json.utf8), HTTPURLResponse(
+            url: URL(string: "https://example.com")!,
+            statusCode: statusCode, httpVersion: nil, headerFields: nil)!)
     }
 
     func stub(json: String, statusCode: Int = 200, url: URL = URL(string: "https://example.com")!) {

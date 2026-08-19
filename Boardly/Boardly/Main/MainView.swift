@@ -4,6 +4,7 @@ import SwiftUI
 struct MainView: View {
     let profile: ServerProfile
     @Environment(ProfileStore.self) private var profileStore
+    @Environment(OfflineCoordinator.self) private var offline
     @Environment(\.scenePhase) private var scenePhase
     @State private var path: [AppRoute] = []
     @State private var notificationsVM: NotificationsViewModel?
@@ -57,6 +58,22 @@ struct MainView: View {
         }
         .tint(.accentColor)
         .environment(boardSessions)
+        // Bind the local-first store to this profile: board sessions read and write its
+        // cache, and the outbox is replayed for this profile on launch and on reconnect.
+        .task(id: profile.id) {
+            boardSessions.offline = offline
+            boardSessions.profileId = profile.id.uuidString
+            let profileStore = profileStore
+            let profile = profile
+            offline.start(profileId: profile.id.uuidString) { profileStore.makeClient(for: profile) }
+        }
+        // Returning to the foreground is the other moment queued work can go out.
+        .onChange(of: scenePhase) { _, phase in
+            guard phase == .active else { return }
+            let profileStore = profileStore
+            let profile = profile
+            offline.sync(profileId: profile.id.uuidString) { profileStore.makeClient(for: profile) }
+        }
         .onChange(of: profile.id) { _, _ in
             // Switched server without going through the picker — drop the previous
             // profile's live boards so no socket crosses profiles.

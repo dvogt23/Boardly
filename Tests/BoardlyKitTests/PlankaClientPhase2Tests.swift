@@ -61,7 +61,7 @@ struct PlankaClientPhase2Tests {
 
     // MARK: - createCard
 
-    @Test("createCard sends POST /api/lists/{id}/cards with name and position")
+    @Test("createCard sends POST /api/lists/{id}/cards with type, name and position")
     func createCardRequest() async throws {
         let cardJSON = #"{"item":{"id":"c-new","boardId":"b1","listId":"l1","creatorUserId":"u1","prevListId":null,"coverAttachmentId":null,"type":"project","position":65536,"name":"New Card","description":null,"dueDate":null,"isDueCompleted":null,"stopwatch":null,"commentsTotal":0,"isClosed":false,"listChangedAt":null,"createdAt":"2024-01-01T10:00:00.000Z","updatedAt":"2024-01-01T10:00:00.000Z"}}"#
         mockHTTP.stub(json: cardJSON)
@@ -73,7 +73,20 @@ struct PlankaClientPhase2Tests {
         let body = try #require(req.httpBody)
         let json = try JSONDecoder().decode([String: AnyCodable].self, from: body)
         #expect(json["name"]?.value as? String == "New Card")
+        // `type` is required by PLANKA — omitting it fails the request outright.
+        #expect(json["type"]?.value as? String == "project")
         #expect(card.name == "New Card")
+    }
+
+    @Test("createCard forwards the board's default card type")
+    func createCardSendsBoardCardType() async throws {
+        let cardJSON = #"{"item":{"id":"c-new","boardId":"b1","listId":"l1","creatorUserId":"u1","prevListId":null,"coverAttachmentId":null,"type":"story","position":65536,"name":"New Card","description":null,"dueDate":null,"isDueCompleted":null,"stopwatch":null,"commentsTotal":0,"isClosed":false,"listChangedAt":null,"createdAt":"2024-01-01T10:00:00.000Z","updatedAt":"2024-01-01T10:00:00.000Z"}}"#
+        mockHTTP.stub(json: cardJSON)
+        _ = try await client.createCard(listId: "l1", name: "New Card", position: 65536, type: "story")
+
+        let body = try #require(mockHTTP.lastRequest?.httpBody)
+        let json = try JSONDecoder().decode([String: AnyCodable].self, from: body)
+        #expect(json["type"]?.value as? String == "story")
     }
 
     // MARK: - updateCard
