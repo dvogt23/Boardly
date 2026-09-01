@@ -26,7 +26,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
@@ -42,7 +42,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
@@ -52,23 +52,43 @@ jobs:
       - name: BoardlyKit unit tests
         run: swift test
       # App-target tests on a simulator (UI tests are excluded).
+      #
+      # xcodebuild refuses a generic destination here ("Tests must be run on a
+      # concrete device") and a bare `platform=iOS Simulator` is ambiguous, so the
+      # device has to be named one way or another. Hard-coding a model ties the job
+      # to whatever the runner image ships — iPhone 16 disappeared with Xcode 26 —
+      # so resolve any available iPhone on the newest installed runtime instead.
       - name: App unit tests (iOS Simulator)
-        run: xcodebuild -project "$PROJECT" -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 16' -only-testing:BoardlyTests test
+        run: |
+          DEVICE_ID=$(xcrun simctl list devices available --json | python3 -c "
+          import json, sys
+          runtimes = json.load(sys.stdin)['devices']
+          version = lambda r: [int(n) for n in r.split('iOS-')[1].split('-')]
+          newest = max((r for r in runtimes
+                        if 'iOS-' in r and any(d['name'].startswith('iPhone') for d in runtimes[r])),
+                       key=version)
+          print(next(d['udid'] for d in runtimes[newest] if d['name'].startswith('iPhone')))
+          ")
+          xcrun simctl list devices available | grep "$DEVICE_ID"
+          xcodebuild -project "$PROJECT" -scheme "$SCHEME" -destination "id=$DEVICE_ID" -only-testing:BoardlyTests test
 
   lint:
     runs-on: macos-15
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      # Pinned to the exact version the repo is formatted with (see .swiftformat),
-      # so CI never flags drift from a newer default rule set.
-      - name: Install SwiftFormat 0.61.1
+      # Pinned to the exact version the repo is formatted with (see .swiftformat), so
+      # CI never flags drift from a newer default rule set. Keep it in step with what
+      # developers run locally, in both directions: a CI older than the local install
+      # lets the post-edit format hook rewrite files that CI then rejects, and a
+      # config naming rules an older pin doesn't recognise fails outright.
+      - name: Install SwiftFormat 0.62.1
         run: |
           curl -fsSL -o swiftformat.zip \
-            https://github.com/nicklockwood/SwiftFormat/releases/download/0.61.1/swiftformat.zip
+            https://github.com/nicklockwood/SwiftFormat/releases/download/0.62.1/swiftformat.zip
           unzip -o -q swiftformat.zip
           chmod +x swiftformat
       - name: SwiftFormat (lint only)
